@@ -12,6 +12,7 @@ function Jobs() {
             {loading ? 
                 <h2>Loading...</h2> :
                 jobs.map(job => {
+                    console.log(job.location);
                     return (
                         <Link to={`/${job.id}`} key={`${job.id}${job.title}`}>
                             <JobElement {...job}/>

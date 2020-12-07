@@ -24,10 +24,10 @@ function reducer(state, action) {
             }
         }
 
-        case 'SEARCH_BY_COMPANY': {
+        case 'SEARCH_BY_TYPE': {
             return {
                 ...state,
-                jobs: action.newJob 
+                jobs: action.newJobWithType 
             }
         }
         

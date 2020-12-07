@@ -35,7 +35,7 @@ function Details() {
                         <div>
                             <div>
                                 <h2>{job.title}</h2>
-                                <button>{job.type && 'Full time'}</button>
+                                <button>{job.type}</button>
                                 <span></span>
                             </div>
                             <div>

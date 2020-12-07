@@ -20,14 +20,14 @@ const ImageStyle = styled.img`
     align-self: center;
 `
 
-function JobElement({company_logo, title, company, location, created_at}) {
+function JobElement({company_logo, title, company, location, created_at, type}) {
     return (
         <ParentStyle>
             <ImageStyle src={company_logo} alt={title}/>
             <div>
                 <p>{company}</p>
                 <p>{title}</p>
-                <button>Full time</button>
+                <button>{type}</button>
             </div>
             <div>
                 <p>{location}</p>

@@ -1,12 +1,11 @@
 import React, { useEffect, useReducer } from 'react'
 
+const CORS_API = 'https://cors-anywhere.herokuapp.com/'
 const description= ''
 const location= ''
 const fulltime=''
 const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fulltime}`;
   
-const CORS_API = 'https://cors-anywhere.herokuapp.com/'
-
 const initialValue = {
     jobs: []
 }
@@ -31,9 +30,7 @@ function useAppReducer() {
 
     useEffect(async () => {
         const response = await fetch(`${CORS_API}${API_URL}`)
-        console.log(response);
         const data = await response.json()
-        console.log(data);
         dispatch({type: 'FETCH_JOBS', allJobs: data})
     }, [])
 

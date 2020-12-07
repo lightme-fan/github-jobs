@@ -4,6 +4,7 @@ import Header from './Header'
 import MainSearch from './search/MainSearch';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import Details from './Details';
 
 const ArticleStyle = styled.article`
     max-width: 1000px;
@@ -14,15 +15,16 @@ function App() {
     return (
         <ArticleStyle>
             <Header/>
-            <MainSearch/>
-            <Jobs/>
-            {/* <Switch>
+            <Switch>
                 <Route exact path='/'>
+                    <MainSearch/>
+                    <Jobs/>
                 </Route>
-                <Route path='/description'>
-                    Description
+                <Route path='/:id'>
+                    <span>Description</span>
+                    <Details/>
                 </Route>
-            </Switch> */}
+            </Switch>
         </ArticleStyle>
     )
 }

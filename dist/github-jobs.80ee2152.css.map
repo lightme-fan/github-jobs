@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAAA;EACI","file":"github-jobs.80ee2152.css","sourceRoot":"..","sourcesContent":["body {\r\n    background-color: #F6F7FB;\r\n}"]}
+{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAAA;EACI;;;AAGJ;EACI;EACA","file":"github-jobs.80ee2152.css","sourceRoot":"..","sourcesContent":["body {\r\n    background-color: #F6F7FB;\r\n}\r\n\r\na {\r\n    text-decoration: none;\r\n    color: #000000;\r\n}"]}

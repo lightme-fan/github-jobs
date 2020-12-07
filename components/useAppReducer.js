@@ -1,10 +1,7 @@
+import axios from 'axios'
 import React, { useEffect, useReducer } from 'react'
 
-const CORS_API = 'https://cors-anywhere.herokuapp.com/'
-const description= ''
-const location= ''
-const fulltime=''
-const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fulltime}`;
+const API_URL = `https://jobs.github.com/positions.json?`;
   
 const initialValue = {
     loading: true,
@@ -44,8 +41,8 @@ function useAppReducer() {
     const [ state, dispatch ] = useReducer(reducer, initialValue)
 
     useEffect(async() => {
-        const response = await fetch(`${CORS_API}${API_URL}`)
-        const data = await response.json()
+        const response = await axios.get(`https://cors-anywhere.herokuapp.com/${API_URL}`)
+        const data = response.data
         dispatch({type: 'FETCH_JOBS', allJobs: data})
     }, [])
 

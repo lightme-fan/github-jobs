@@ -22,20 +22,18 @@ const ImageStyle = styled.img`
 
 function JobElement({company_logo, title, company, location, created_at}) {
     return (
-        // <Link to='/descripion'>
         <ParentStyle>
             <ImageStyle src={company_logo} alt={title}/>
             <div>
                 <p>{company}</p>
                 <p>{title}</p>
-                 <button>Full time</button>
+                <button>Full time</button>
             </div>
             <div>
                 <p>{location}</p>
                 <p>{created_at}</p>
             </div>
         </ParentStyle>
-        // </Link>
     )
 }
 

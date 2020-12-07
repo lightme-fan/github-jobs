@@ -7,6 +7,7 @@ const fulltime=''
 const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fulltime}`;
   
 const initialValue = {
+    loading: true,
     jobs: []
 }
 
@@ -15,9 +16,17 @@ function reducer(state, action) {
         case 'FETCH_JOBS': {
             return {
                 ...state,
-                jobs: [...state.jobs, action.allJobs]
+                loading: false,
+                jobs: action.allJobs
             }
         }
+        case 'SEARCH_BY_TITLE_COMPANY_EXPERTISE': {
+            return {
+                ...state,
+                jobs: action.newJob 
+            }
+        }
+        
         default: {
             return state
         }
@@ -26,15 +35,14 @@ function reducer(state, action) {
 
 function useAppReducer() {
     const [ state, dispatch ] = useReducer(reducer, initialValue)
-    const { jobs } = state
 
-    useEffect(async () => {
+    useEffect(async() => {
         const response = await fetch(`${CORS_API}${API_URL}`)
         const data = await response.json()
         dispatch({type: 'FETCH_JOBS', allJobs: data})
     }, [])
 
-    return [jobs, dispatch]
+    return [state, dispatch]
 }
 
 export default useAppReducer

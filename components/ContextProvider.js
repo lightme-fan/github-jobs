@@ -1,15 +1,17 @@
-import React, { createContext } from 'react'
+import React, { createContext, useState } from 'react'
+import { Link } from 'react-router-dom'
 import useAppReducer from './useAppReducer'
 
 const Context = createContext()
 
 function ContextProvider({children}) {
-    const [jobs, dispatch] = useAppReducer()
-    console.log(jobs);
+    const [state, dispatch] = useAppReducer()
+    const {loading, jobs} = state
+    console.log(loading);
     
     return (
         <Context.Provider value={{jobs, dispatch}}>
-            {children}
+            {children}            
         </Context.Provider>
     )
 }

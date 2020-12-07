@@ -33887,7 +33887,14 @@ function reducer(state, action) {
         };
       }
 
-    case 'SEARCH_BY_TITLE_COMPANY_EXPERTISE':
+    case 'SEARCH_BY_TITLE':
+      {
+        return { ...state,
+          jobs: action.newJob
+        };
+      }
+
+    case 'SEARCH_BY_COMPANY':
       {
         return { ...state,
           jobs: action.newJob
@@ -36053,14 +36060,22 @@ function MainSearch() {
 
   function searchParticularJob(e) {
     e.preventDefault();
-    const filteredJobs = jobs.filter(job => {
+    const filteredByTitle = jobs.filter(job => {
       const searchByTile = job.title.toLowerCase().includes(searchJob.toLowerCase());
-      const searchByCompany = job.company.toLowerCase().includes(searchJob.toLowerCase());
       return searchByTile;
     });
+    const filteredByCompany = jobs.filter(job => {
+      const searchByTile = job.company.toLowerCase().includes(searchJob.toLowerCase());
+      return searchByTile;
+    });
+    const filtered = jobs.filter(job => {
+      const searchByTile = job.title.toLowerCase().includes(searchJob.toLowerCase());
+      return searchByTile;
+    });
+    console.log(filteredByTitle);
     dispatch({
-      type: 'SEARCH_BY_TITLE_COMPANY_EXPERTISE',
-      newJob: filteredJobs
+      type: 'SEARCH_BY_TITLE',
+      newJob: filteredByTitle
     });
     setSearchJob('');
   }

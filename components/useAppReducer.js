@@ -20,7 +20,14 @@ function reducer(state, action) {
                 jobs: action.allJobs
             }
         }
-        case 'SEARCH_BY_TITLE_COMPANY_EXPERTISE': {
+        case 'SEARCH_BY_TITLE': {
+            return {
+                ...state,
+                jobs: action.newJob 
+            }
+        }
+
+        case 'SEARCH_BY_COMPANY': {
             return {
                 ...state,
                 jobs: action.newJob 

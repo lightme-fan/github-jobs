@@ -35692,6 +35692,13 @@ function reducer(state, action) {
         };
       }
 
+    case 'SEARCH_BY_CITIES':
+      {
+        return { ...state,
+          jobs: action.newJobByCities
+        };
+      }
+
     default:
       {
         return state;
@@ -37856,7 +37863,34 @@ function CityElement({
 
 var _default = CityElement;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/search/FilterByLocation.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"pages/FormSearchLocation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function FormSearchLocation({
+  onChange,
+  onSubmit
+}) {
+  return /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: onSubmit
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    placeholder: "City, state, zip code or Location",
+    onChange: onChange
+  }));
+}
+
+var _default = FormSearchLocation;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"components/search/FilterByLocation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37872,6 +37906,8 @@ var _citiesData = _interopRequireDefault(require("../../citiesData.json"));
 
 var _CityElement = _interopRequireDefault(require("../../pages/CityElement"));
 
+var _FormSearchLocation = _interopRequireDefault(require("../../pages/FormSearchLocation"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -37883,27 +37919,42 @@ function FilterByLocation() {
     jobs,
     dispatch
   } = (0, _react.useContext)(_ContextProvider.Context);
+  const [location, setLocation] = (0, _react.useState)('');
 
   function seachByLocation(e) {
+    e.preventDefault();
     console.log(e.target.value);
-    const job = jobs.filter(job => job.location.includes(e.target.value));
+    const job = jobs.filter(job => job.location.toLowerCase().includes(location.toLowerCase()));
     console.log(job);
     dispatch({
       type: 'SEARCH_BY_LOCATION',
       newJobByLocation: job
     });
+    setLocation('');
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("ul", null, _citiesData.default.map(city => /*#__PURE__*/_react.default.createElement(_CityElement.default, {
+  function seachByCity(e) {
+    const job = jobs.filter(job => job.location.includes(e.target.value));
+    console.log(job);
+    dispatch({
+      type: 'SEARCH_BY_CITIES',
+      newJobByCities: job
+    });
+  }
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_FormSearchLocation.default, {
+    onSubmit: seachByLocation,
+    onChange: e => setLocation(e.target.value)
+  }), /*#__PURE__*/_react.default.createElement("ul", null, _citiesData.default.map(city => /*#__PURE__*/_react.default.createElement(_CityElement.default, {
     key: city.id,
     city: city,
-    onChange: seachByLocation
+    onChange: seachByCity
   }))));
 }
 
 var _default = FilterByLocation;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../ContextProvider":"components/ContextProvider.js","../../citiesData.json":"citiesData.json","../../pages/CityElement":"pages/CityElement.js"}],"components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../ContextProvider":"components/ContextProvider.js","../../citiesData.json":"citiesData.json","../../pages/CityElement":"pages/CityElement.js","../../pages/FormSearchLocation":"pages/FormSearchLocation.js"}],"components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

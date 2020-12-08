@@ -7,7 +7,6 @@ const Context = createContext()
 function ContextProvider({children}) {
     const [state, dispatch] = useAppReducer()
     const {loading, jobs} = state
-    console.log(loading);
 
     // Removing tags inside of string
     function removeTags(str) { 

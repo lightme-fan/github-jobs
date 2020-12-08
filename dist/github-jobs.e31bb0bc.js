@@ -37367,7 +37367,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const API_URL = `https://jobs.github.com/positions.json?`;
+const CORS_URL = 'https://cors-anywhere.herokuapp.com/';
+const API_URL = 'https://jobs.github.com/positions.json';
+const description = '';
+const location = '';
+const fulltime = true;
+const page = 1;
+const API = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fulltime}`;
 const initialValue = {
   loading: true,
   jobs: []
@@ -37421,8 +37427,8 @@ function reducer(state, action) {
 function useAppReducer() {
   const [state, dispatch] = (0, _react.useReducer)(reducer, initialValue);
   (0, _react.useEffect)(async () => {
-    const response = await _axios.default.get(`https://cors-anywhere.herokuapp.com/${API_URL}`);
-    const data = response.data;
+    const response = await (0, _axios.default)(CORS_URL + API_URL);
+    const data = await response.data;
     dispatch({
       type: 'FETCH_JOBS',
       allJobs: data
@@ -37464,8 +37470,7 @@ function ContextProvider({
   const {
     loading,
     jobs
-  } = state;
-  console.log(loading); // Removing tags inside of string
+  } = state; // Removing tags inside of string
 
   function removeTags(str) {
     if (str === null || str === '') return false;else str = str.toString();
@@ -37562,8 +37567,17 @@ function Jobs() {
     jobs,
     dispatch
   } = (0, _react.useContext)(_ContextProvider.Context);
+  const [page, setPage] = (0, _react.useState)(1);
+  const [perPage, setPerPage] = (0, _react.useState)(5); // const maxPage = Math.ceil(jobs.length / perPage)
+  // console.log(maxPage);
+  // const firstPage = (page - 1) * perPage;
+  // console.log(firstPage);
+  // const lastPage = firstPage + perPage;
+  // console.log(lastPage);
+  // const slicedJobs = jobs.slice(0, perPage)
+  // console.log(slicedJobs);
+
   return /*#__PURE__*/_react.default.createElement("div", null, loading ? /*#__PURE__*/_react.default.createElement("h2", null, "Loading...") : jobs.map(job => {
-    console.log(job.location);
     return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: `/${job.id}`,
       key: `${job.id}${job.title}`
@@ -37604,7 +37618,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const ArticleStyle = _styledComponents.default.article`
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
 `;
 exports.ArticleStyle = ArticleStyle;
@@ -37902,18 +37916,27 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
 var _style = require("../components/styles/style");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Style 
+const H2style = _styledComponents.default.h2`
+    font-size: 14px;
+    line-height: 21px;
+    text-transform: uppercase;
+    color: #B9BDCF;
+`;
+
 function FormSearchLocation({
   onChange,
   onSubmit
 }) {
   return /*#__PURE__*/_react.default.createElement(_style.LocationSearchStyle, {
     onSubmit: onSubmit
-  }, /*#__PURE__*/_react.default.createElement("input", {
+  }, /*#__PURE__*/_react.default.createElement(H2style, null, "Location"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     placeholder: "City, state, zip code or Location",
     onChange: onChange
@@ -37922,7 +37945,7 @@ function FormSearchLocation({
 
 var _default = FormSearchLocation;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components/styles/style":"components/styles/style.js"}],"components/search/FilterByLocation.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../components/styles/style":"components/styles/style.js"}],"components/search/FilterByLocation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38026,12 +38049,14 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // Import files
 // Imort style
 function App() {
-  return /*#__PURE__*/_react.default.createElement(_style.ArticleStyle, null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  return /*#__PURE__*/_react.default.createElement(_style.ArticleStyle, null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
-  }, /*#__PURE__*/_react.default.createElement(_MainSearch.default, null), /*#__PURE__*/_react.default.createElement(_FilterByType.default, null), /*#__PURE__*/_react.default.createElement(_FilterByLocation.default, null), /*#__PURE__*/_react.default.createElement(_Jobs.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, /*#__PURE__*/_react.default.createElement(_MainSearch.default, null), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_FilterByType.default, null), /*#__PURE__*/_react.default.createElement(_FilterByLocation.default, null)), /*#__PURE__*/_react.default.createElement(_Jobs.default, null))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/:id"
-  }, /*#__PURE__*/_react.default.createElement("span", null, "Description"), /*#__PURE__*/_react.default.createElement(_Details.default, null))));
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Description"), /*#__PURE__*/_react.default.createElement(_Details.default, null)))));
 }
 
 var _default = App;
@@ -38080,7 +38105,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59059" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50662" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

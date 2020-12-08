@@ -18,18 +18,24 @@ function App() {
     return (
         <ArticleStyle>
             <Header/>
+            <div className='container'>
             <Switch>
                 <Route exact path='/'>
                     <MainSearch/>
-                    <FilterByType/>
-                    <FilterByLocation/>
-                    <Jobs/>
+                    <div>
+                        <div>                        
+                            <FilterByType/>
+                            <FilterByLocation/>
+                        </div>    
+                        <Jobs/>
+                    </div>
                 </Route>
                 <Route path='/:id'>
                     <span>Description</span>
                     <Details/>
                 </Route>
             </Switch>
+            </div>
         </ArticleStyle>
     )
 }

@@ -12,4 +12,16 @@ input[type=checkbox] {
   height: 23px;
 }
 
+@media (min-width: 770px) {
+  .container > div {
+    display: grid;
+    grid-template-columns: 379px 1fr;
+    gap: 2rem;
+  }
+
+  header {
+    grid-area: "header";
+  }
+}
+
 /*# sourceMappingURL=/github-jobs.80ee2152.css.map */

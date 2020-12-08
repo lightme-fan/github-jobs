@@ -1,11 +1,13 @@
 import React from 'react'
 
+import { FullTimeStyle } from '../components/styles/style'
+
 function FullTimeElem({onChange, value}) {
     return (
-        <div>
+        <FullTimeStyle>
             <input type='checkbox' value={value} onChange={onChange}/>
             <label>Full Time</label>
-        </div>
+        </FullTimeStyle>
     )
 }
 

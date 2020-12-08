@@ -1,17 +1,18 @@
 import React, { useContext } from 'react'
+import { Switch, Route } from 'react-router-dom';
+import styled from 'styled-components';
+
+// Import files
 import Jobs from './Jobs';
 import Header from './Header'
 import MainSearch from './search/MainSearch';
-import { Switch, Route } from 'react-router-dom';
-import styled from 'styled-components';
 import Details from './Details';
 import FilterByType from './search/FilterByType';
 import FilterByLocation from './search/FilterByLocation';
 
-const ArticleStyle = styled.article`
-    max-width: 1000px;
-    margin: auto;
-`
+// Imort style
+import { ArticleStyle } from './styles/style'
+
 function App() {
     
     return (

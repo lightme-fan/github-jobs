@@ -17,7 +17,6 @@ function FilterByType() {
 
     return (
         <div>
-            <h2>Type</h2>
             <FullTimeElem value={fullTime} onChange={handleFilterBType}/>
         </div>
     )

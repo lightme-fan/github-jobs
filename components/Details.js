@@ -2,12 +2,8 @@ import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { Context } from './ContextProvider'
 
-import leftArrow from '../icons/leftArrow.svg'
-import styled from 'styled-components';
-
-const BackStyle = styled.span`
-    color: #1E86FF;
-`
+//  Style
+import { BackStyle } from './styles/style'
 
 function Details() {
     const { jobs, loading, removeTags } = useContext(Context)

@@ -1,8 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { Context } from '../ContextProvider'
+
 import cities from '../../citiesData.json'
 import CityElement from '../../pages/CityElement'
 import FormSearchLocation from '../../pages/FormSearchLocation'
+
+// Style
+import { UlStyle } from '../styles/style'
 
 function FilterByLocation() {
     const {jobs, dispatch} = useContext(Context)
@@ -30,7 +34,7 @@ function FilterByLocation() {
                 onSubmit={seachByLocation} 
                 onChange={(e) => setLocation(e.target.value)}
             />
-            <ul>
+            <UlStyle>
                 {cities.map(city => 
                     <CityElement 
                         key={city.id} 
@@ -38,7 +42,7 @@ function FilterByLocation() {
                         onChange={seachByCity}
                     />
                 )}
-            </ul>
+            </UlStyle>
         </div>
     )
 }

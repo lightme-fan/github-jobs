@@ -6,7 +6,6 @@ function FilterByType() {
     const [fullTime, setFullTime] = useState('Full Time')
 
     const {jobs, dispatch} = useContext(Context)
-    console.log(jobs);
     
     function handleFilterBType(e) {
         console.log(e.target.value);

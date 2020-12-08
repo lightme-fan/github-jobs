@@ -7,4 +7,9 @@ a {
   color: #000000;
 }
 
+input[type=checkbox] {
+  width: 23px;
+  height: 23px;
+}
+
 /*# sourceMappingURL=/github-jobs.80ee2152.css.map */

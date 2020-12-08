@@ -18,7 +18,7 @@ function ContextProvider({children}) {
               
         return str.replace( /(<([^>]+)>)/ig, ''); 
     }
-    
+
     return (
         <Context.Provider value={{jobs, dispatch, removeTags}}>
             {children}            

@@ -13,9 +13,6 @@ function Details() {
     const { jobs, loading, removeTags } = useContext(Context)
     const { id } = useParams()
     const newJobs = jobs.filter(job => job.id === id)
-    console.log(newJobs);
-
-
 
     return (
         <div>

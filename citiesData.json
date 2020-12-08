@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "city_name": "Berlin"
+    },
+    {
+        "id": 2,
+        "city_name": "London"
+    },
+    {
+        "id": 3,
+        "city_name": "New York"
+    },
+    {
+        "id": 4,
+        "city_name": "San Francisco"
+    },
+    {
+        "id": 5,
+        "city_name": "United States"
+    }
+]

@@ -35685,6 +35685,13 @@ function reducer(state, action) {
         };
       }
 
+    case 'SEARCH_BY_LOCATION':
+      {
+        return { ...state,
+          jobs: action.newJobByLocation
+        };
+      }
+
     default:
       {
         return state;
@@ -37712,7 +37719,6 @@ function Details() {
     id
   } = (0, _reactRouterDom.useParams)();
   const newJobs = jobs.filter(job => job.id === id);
-  console.log(newJobs);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Details"), newJobs.map(job => {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: job.id
@@ -37778,7 +37784,6 @@ function FilterByType() {
     jobs,
     dispatch
   } = (0, _react.useContext)(_ContextProvider.Context);
-  console.log(jobs);
 
   function handleFilterBType(e) {
     console.log(e.target.value);
@@ -37798,7 +37803,107 @@ function FilterByType() {
 
 var _default = FilterByType;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../../pages/FullTimeElem":"pages/FullTimeElem.js","../ContextProvider":"components/ContextProvider.js"}],"components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../../pages/FullTimeElem":"pages/FullTimeElem.js","../ContextProvider":"components/ContextProvider.js"}],"citiesData.json":[function(require,module,exports) {
+module.exports = [{
+  "id": 1,
+  "city_name": "Berlin"
+}, {
+  "id": 2,
+  "city_name": "London"
+}, {
+  "id": 3,
+  "city_name": "New York"
+}, {
+  "id": 4,
+  "city_name": "San Francisco"
+}, {
+  "id": 5,
+  "city_name": "United States"
+}];
+},{}],"pages/CityElement.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const ListStyle = _styledComponents.default.li`
+    input {
+        margin-right: 2rem;
+    }
+`;
+
+function CityElement({
+  city,
+  onChange
+}) {
+  return /*#__PURE__*/_react.default.createElement(ListStyle, null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "checkbox",
+    id: city.city_name,
+    value: city.city_name,
+    onChange: onChange
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: city.city_name
+  }, city.city_name));
+}
+
+var _default = CityElement;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/search/FilterByLocation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ContextProvider = require("../ContextProvider");
+
+var _citiesData = _interopRequireDefault(require("../../citiesData.json"));
+
+var _CityElement = _interopRequireDefault(require("../../pages/CityElement"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function FilterByLocation() {
+  const {
+    jobs,
+    dispatch
+  } = (0, _react.useContext)(_ContextProvider.Context);
+
+  function seachByLocation(e) {
+    console.log(e.target.value);
+    const job = jobs.filter(job => job.location.includes(e.target.value));
+    console.log(job);
+    dispatch({
+      type: 'SEARCH_BY_LOCATION',
+      newJobByLocation: job
+    });
+  }
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("ul", null, _citiesData.default.map(city => /*#__PURE__*/_react.default.createElement(_CityElement.default, {
+    key: city.id,
+    city: city,
+    onChange: seachByLocation
+  }))));
+}
+
+var _default = FilterByLocation;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../ContextProvider":"components/ContextProvider.js","../../citiesData.json":"citiesData.json","../../pages/CityElement":"pages/CityElement.js"}],"components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37822,6 +37927,8 @@ var _Details = _interopRequireDefault(require("./Details"));
 
 var _FilterByType = _interopRequireDefault(require("./search/FilterByType"));
 
+var _FilterByLocation = _interopRequireDefault(require("./search/FilterByLocation"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -37837,14 +37944,14 @@ function App() {
   return /*#__PURE__*/_react.default.createElement(ArticleStyle, null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
-  }, /*#__PURE__*/_react.default.createElement(_MainSearch.default, null), /*#__PURE__*/_react.default.createElement(_FilterByType.default, null), /*#__PURE__*/_react.default.createElement(_Jobs.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, /*#__PURE__*/_react.default.createElement(_MainSearch.default, null), /*#__PURE__*/_react.default.createElement(_FilterByType.default, null), /*#__PURE__*/_react.default.createElement(_FilterByLocation.default, null), /*#__PURE__*/_react.default.createElement(_Jobs.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/:id"
   }, /*#__PURE__*/_react.default.createElement("span", null, "Description"), /*#__PURE__*/_react.default.createElement(_Details.default, null))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Jobs":"components/Jobs.js","./Header":"components/Header.js","./search/MainSearch":"components/search/MainSearch.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","./Details":"components/Details.js","./search/FilterByType":"components/search/FilterByType.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Jobs":"components/Jobs.js","./Header":"components/Header.js","./search/MainSearch":"components/search/MainSearch.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","./Details":"components/Details.js","./search/FilterByType":"components/search/FilterByType.js","./search/FilterByLocation":"components/search/FilterByLocation.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

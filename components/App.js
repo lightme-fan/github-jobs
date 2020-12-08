@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Details from './Details';
 import FilterByType from './search/FilterByType';
+import FilterByLocation from './search/FilterByLocation';
 
 const ArticleStyle = styled.article`
     max-width: 1000px;
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path='/'>
                     <MainSearch/>
                     <FilterByType/>
+                    <FilterByLocation/>
                     <Jobs/>
                 </Route>
                 <Route path='/:id'>

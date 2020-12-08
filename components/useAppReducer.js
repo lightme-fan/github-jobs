@@ -30,6 +30,13 @@ function reducer(state, action) {
                 jobs: action.newJobWithType 
             }
         }
+
+        case 'SEARCH_BY_LOCATION': {
+            return {
+                ...state,
+                jobs: action.newJobByLocation 
+            }
+        }
         
         default: {
             return state

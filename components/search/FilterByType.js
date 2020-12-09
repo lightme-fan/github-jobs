@@ -8,11 +8,9 @@ function FilterByType() {
 
     const {jobs, dispatch} = useContext(Context)
     
+    // Filtering jobs by its type
     function handleFilterBType(e) {
-        console.log(e.target.value);
-        
         const filteredByType = jobs.filter(job => job.type === fullTime)
-        console.log(filteredByType);
         dispatch({type: 'SEARCH_BY_TYPE', newJobWithType: filteredByType})
     }
 

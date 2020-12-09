@@ -30,6 +30,7 @@
 ## Overview
 
 ![screenshot](./assets/screeshot.png)
+![screenshot2](./assets/screenshot2.png)
 
 ### My Project
 

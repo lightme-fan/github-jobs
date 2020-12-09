@@ -4,6 +4,7 @@ import useAppReducer from './useAppReducer'
 const Context = createContext()
 
 function ContextProvider({children}) {
+    // importing useApp reducer
     const [state, dispatch] = useAppReducer()
     const {loading, jobs} = state
 

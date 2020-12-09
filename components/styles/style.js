@@ -89,7 +89,7 @@ export const DetailTitle = styled.div`
         color: #B7BCCE;
     }
     a {
-        color: color: #1E86FF;;
+        color: #1E86FF;
     }
 `
 export const MoreDetailStyle = styled.div`
@@ -111,6 +111,7 @@ export const MoreDetailStyle = styled.div`
 export const ApplicationStyle = styled.div`
     a {
         color: #1E86FF;
+        word-break: break-all;
     }
 `
 

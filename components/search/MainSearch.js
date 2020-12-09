@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 
+// Context
 import { Context } from '../ContextProvider'
 
 //  Style
@@ -9,6 +10,7 @@ function MainSearch() {
     const {jobs, dispatch} = useContext(Context)
     const [ searchJob, setSearchJob ] = useState('')
     
+    // Filtering the jobs by title and company
     function searchParticularJob(e) {
         e.preventDefault()
         const filteredJobs = jobs.filter(job => {

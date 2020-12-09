@@ -2,9 +2,11 @@ import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from "react-js-pagination";
 
+// Importing files
 import { Context } from './ContextProvider';
 import JobElement from '../pages/JobElement'
 
+// Importing style
 import {PaginationStyle} from './styles/style'
 
 function Jobs() {
@@ -43,6 +45,7 @@ function Jobs() {
                             </Link>
                         )
                     })} 
+                    {/* Pagination element */}
                 <PaginationStyle>
                     <Pagination
                         activePage={ activePage }

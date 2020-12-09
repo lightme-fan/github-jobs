@@ -38164,6 +38164,7 @@ exports.Context = Context;
 function ContextProvider({
   children
 }) {
+  // importing useApp reducer
   const [state, dispatch] = (0, _useAppReducer.default)();
   const {
     loading,
@@ -40083,7 +40084,7 @@ const DetailTitle = _styledComponents.default.div`
         color: #B7BCCE;
     }
     a {
-        color: color: #1E86FF;;
+        color: #1E86FF;
     }
 `;
 exports.DetailTitle = DetailTitle;
@@ -40106,6 +40107,7 @@ exports.MoreDetailStyle = MoreDetailStyle;
 const ApplicationStyle = _styledComponents.default.div`
     a {
         color: #1E86FF;
+        word-break: break-all;
     }
 `;
 exports.ApplicationStyle = ApplicationStyle;
@@ -40254,13 +40256,14 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+// Context
 //  Style
 function MainSearch() {
   const {
     jobs,
     dispatch
   } = (0, _react.useContext)(_ContextProvider.Context);
-  const [searchJob, setSearchJob] = (0, _react.useState)('');
+  const [searchJob, setSearchJob] = (0, _react.useState)(''); // Filtering the jobs by title and company
 
   function searchParticularJob(e) {
     e.preventDefault();
@@ -40314,7 +40317,8 @@ function Details() {
     jobs,
     loading,
     removeTags
-  } = (0, _react.useContext)(_ContextProvider.Context);
+  } = (0, _react.useContext)(_ContextProvider.Context); // I use useParams to get a specific job
+
   const {
     id
   } = (0, _reactRouterDom.useParams)();
@@ -40399,12 +40403,10 @@ function FilterByType() {
   const {
     jobs,
     dispatch
-  } = (0, _react.useContext)(_ContextProvider.Context);
+  } = (0, _react.useContext)(_ContextProvider.Context); // Filtering jobs by its type
 
   function handleFilterBType(e) {
-    console.log(e.target.value);
     const filteredByType = jobs.filter(job => job.type === fullTime);
-    console.log(filteredByType);
     dispatch({
       type: 'SEARCH_BY_TYPE',
       newJobWithType: filteredByType
@@ -40540,19 +40542,18 @@ function FilterByLocation() {
     jobs,
     dispatch
   } = (0, _react.useContext)(_ContextProvider.Context);
-  const [location, setLocation] = (0, _react.useState)('');
+  const [location, setLocation] = (0, _react.useState)(''); // Filter by location
 
   function seachByLocation(e) {
     e.preventDefault();
-    console.log(e.target.value);
     const job = jobs.filter(job => job.location.toLowerCase().includes(location.toLowerCase()));
-    console.log(job);
     dispatch({
       type: 'SEARCH_BY_LOCATION',
       newJobByLocation: job
     });
     setLocation('');
-  }
+  } // Filter by jobs by comparing its location and the cityData
+
 
   function seachByCity(e) {
     const job = jobs.filter(job => job.location.includes(e.target.value));
@@ -40666,7 +40667,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54510" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59450" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -13,6 +13,7 @@ import {
 
 function Details() {
     const { jobs, loading, removeTags } = useContext(Context)
+    // I use useParams to get a specific job
     const { id } = useParams()
     const newJobs = jobs.filter(job => job.id === id)
 

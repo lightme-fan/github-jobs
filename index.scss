@@ -12,10 +12,16 @@ input[type='checkbox'] {
     height: 23px;
 }
 
+svg {
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+}
+
 @media(min-width: 770px) {
     .container > div {
         display: grid;
-        grid-template-columns: 40% 1fr;
+        grid-template-columns: 35% 1fr;
         gap: 4rem;
     } 
 }

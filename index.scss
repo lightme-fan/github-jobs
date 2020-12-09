@@ -15,7 +15,7 @@ input[type='checkbox'] {
 @media(min-width: 770px) {
     .container > div {
         display: grid;
-        grid-template-columns: 379px 1fr;
-        gap: 2rem;
+        grid-template-columns: 40% 1fr;
+        gap: 4rem;
     } 
 }

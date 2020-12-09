@@ -39984,7 +39984,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const ArticleStyle = _styledComponents.default.article`
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
     color: #334680;
 `;
 exports.ArticleStyle = ArticleStyle;
@@ -40046,6 +40046,10 @@ const LocationSearchStyle = _styledComponents.default.form`
         padding: 4% 2%;
         border: none;
         border-radius: 7px;
+    }
+
+    input::before {
+        content: ''
     }
 `;
 exports.LocationSearchStyle = LocationSearchStyle;
@@ -40125,6 +40129,10 @@ const PaginationStyle = _styledComponents.default.div`
         li:hover {
             border-color: #1E86FF;
         }
+
+        .active_page {
+            background: #1E86FF;
+        }
     }
 `;
 exports.PaginationStyle = PaginationStyle;
@@ -40164,14 +40172,15 @@ function Jobs() {
   } = (0, _react.useContext)(_ContextProvider.Context); // Pagination
 
   const [activePage, setActivePage] = (0, _react.useState)(1);
-  const [perPage, setPerPage] = (0, _react.useState)(3); // Current Jobs
+  const [perPage, setPerPage] = (0, _react.useState)(5);
+  const [pageClassName, setPageClassName] = (0, _react.useState)(''); // Current Jobs
 
   const lastPage = activePage * perPage;
   const firstPage = lastPage - perPage;
-  const currentJobs = jobs.slice(firstPage, lastPage);
-  console.log(currentJobs); // Handle page number
+  const currentJobs = jobs.slice(firstPage, lastPage); // Handle page number
 
   function handlePageChange(pageNumber) {
+    setPageClassName('active_page');
     setActivePage(pageNumber);
   }
 
@@ -40484,7 +40493,7 @@ function FormSearchLocation({
     onSubmit: onSubmit
   }, /*#__PURE__*/_react.default.createElement(H2style, null, "Location"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    placeholder: `${_globIcon.default} City, state, zip code or Location`,
+    placeholder: "City, state, zip code or Location",
     onChange: onChange
   }));
 }

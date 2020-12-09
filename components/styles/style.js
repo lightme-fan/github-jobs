@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ArticleStyle = styled.article`
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
     color: #334680;
 `;
 
@@ -64,6 +64,10 @@ export const LocationSearchStyle = styled.form`
         padding: 4% 2%;
         border: none;
         border-radius: 7px;
+    }
+
+    input::before {
+        content: ''
     }
 `;
 
@@ -141,6 +145,10 @@ export const PaginationStyle = styled.div`
 
         li:hover {
             border-color: #1E86FF;
+        }
+
+        .active_page {
+            background: #1E86FF;
         }
     }
 `

@@ -12,17 +12,17 @@ function Jobs() {
 
     // Pagination
     const [ activePage, setActivePage ] = useState( 1 );
-    const [perPage, setPerPage] = useState(3)
-    
+    const [perPage, setPerPage] = useState(5)
+    const [ pageClassName, setPageClassName] = useState('')
    
    // Current Jobs
     const lastPage  = activePage * perPage;
     const firstPage = lastPage - perPage;
     const currentJobs = jobs.slice( firstPage, lastPage );
-    console.log(currentJobs)
-
+   
     // Handle page number
     function handlePageChange(pageNumber) {
+        setPageClassName('active_page')
         setActivePage(pageNumber)
     }
 

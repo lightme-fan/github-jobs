@@ -19,7 +19,7 @@ function FormSearchLocation({onChange, onSubmit}) {
             <H2style>Location</H2style>
             <input 
                 type='text'
-                placeholder={`${globIcon} City, state, zip code or Location`}
+                placeholder='City, state, zip code or Location'
                 onChange={onChange}
             />
         </LocationSearchStyle>

@@ -119,3 +119,28 @@ export const DescStyle = styled.div`
         padding: 0;
     }
 `
+
+export const PaginationStyle = styled.div`
+    ul {
+        margin-top: 30px;
+        list-style: none;
+        display: flex;
+        padding: 0;
+        justify-content: flex-end;
+        li {
+            padding: 6px 17px;
+            border: 1px solid;
+            border-radius: 7px;
+            margin-right: 2%;
+        }
+
+        li:nth-of-type(1),
+        li:last-of-type {
+            display: none;
+        }
+
+        li:hover {
+            border-color: #1E86FF;
+        }
+    }
+`

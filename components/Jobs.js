@@ -1,43 +1,59 @@
 import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom'
+import Pagination from "react-js-pagination";
 
 import { Context } from './ContextProvider';
 import JobElement from '../pages/JobElement'
 
+import {PaginationStyle} from './styles/style'
+
 function Jobs() {
     const {loading, jobs, dispatch} = useContext(Context)
 
-    const [page, setPage] = useState(1)
-    const [perPage, setPerPage] = useState(5)
+    // Pagination
+    const [ activePage, setActivePage ] = useState( 1 );
+    const [perPage, setPerPage] = useState(3)
     
-    // const maxPage = Math.ceil(jobs.length / perPage)
-    // console.log(maxPage);
-    
-    // const firstPage = (page - 1) * perPage;
-    // console.log(firstPage);
-    // const lastPage = firstPage + perPage;
-    // console.log(lastPage);
+   
+   // Current Jobs
+    const lastPage  = activePage * perPage;
+    const firstPage = lastPage - perPage;
+    const currentJobs = jobs.slice( firstPage, lastPage );
+    console.log(currentJobs)
 
-    // const slicedJobs = jobs.slice(0, perPage)
-    // console.log(slicedJobs);
-    
+    // Handle page number
+    function handlePageChange(pageNumber) {
+        setActivePage(pageNumber)
+    }
+
     return (
-        <div>
-            {loading ? 
-                <h2>Loading...</h2> :
-                jobs.map(job => {
-                    const jobDate = new Date(job.created_at)
-                    const dateNow = new Date(Date.now())
-                    const differenceInDate = dateNow.getTime() - jobDate.getTime()
-                    const numberOfDay = Math.round(differenceInDate / (1000 * 3600 * 24))
+        <>
+            <div>
+                {loading ? 
+                    <h2>Loading...</h2> :
+                    currentJobs.map(job => {
+                        const jobDate = new Date(job.created_at)
+                        const dateNow = new Date(Date.now())
+                        const differenceInDate = dateNow.getTime() - jobDate.getTime()
+                        const numberOfDay = Math.round(differenceInDate / (1000 * 3600 * 24))
 
-                    return (
-                        <Link to={`/${job.id}`} key={`${job.id}${job.title}`}>
-                            <JobElement time={numberOfDay} {...job} />
-                        </Link>
-                    )
-                })} 
-        </div>
+                        return (
+                            <Link to={`/${job.id}`} key={`${job.id}${job.title}`}>
+                                <JobElement time={numberOfDay} {...job} />
+                            </Link>
+                        )
+                    })} 
+                <PaginationStyle>
+                    <Pagination
+                        activePage={ activePage }
+                        itemsCountPerPage={ 3 }
+                        totalItemsCount={ jobs.length }
+                        pageRangeDisplayed={ 3 }
+                        onChange={ handlePageChange }
+                    />
+                </PaginationStyle>
+            </div>
+        </>
     )
 }
 

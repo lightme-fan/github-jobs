@@ -26,7 +26,7 @@ export const FormSearchStyle = styled.form`
         input {
             width: 100%;
             padding: 10px;
-            border: none
+            border: none;
         }
 
         button {
@@ -70,3 +70,52 @@ export const LocationSearchStyle = styled.form`
 export const UlStyle = styled.ul`
     padding: 0;
 `;
+
+export const DetailTitle = styled.div`
+    display: flex;
+    gap: 2%;
+    button {
+        height: 40px;
+        width: 15%;
+        align-self: center;
+    }
+    span {
+        font-size: 12px;
+        line-height: 14px;
+        color: #B7BCCE;
+    }
+    a {
+        color: color: #1E86FF;;
+    }
+`
+export const MoreDetailStyle = styled.div`
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 10px;
+    img {
+        width: 20%;
+        height: 100px;
+    }
+    p {
+        font-size: 12px;
+        line-height: 14px;
+        color: #B7BCCE;
+    }
+`
+
+export const ApplicationStyle = styled.div`
+    a {
+        color: #1E86FF;
+    }
+`
+
+export const DescStyle = styled.div`
+    a {
+        color: #1E86FF;
+    }
+
+    ul {
+        padding: 0;
+    }
+`

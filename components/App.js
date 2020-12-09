@@ -18,7 +18,7 @@ function App() {
     return (
         <ArticleStyle>
             <Header/>
-            <div className='container'>
+            <div className='container details'>
             <Switch>
                 <Route exact path='/'>
                     <MainSearch/>
@@ -31,7 +31,6 @@ function App() {
                     </div>
                 </Route>
                 <Route path='/:id'>
-                    <span>Description</span>
                     <Details/>
                 </Route>
             </Switch>

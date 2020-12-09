@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import globIcon from '../icons/globIcon.svg'
+
 // Style 
 import { LocationSearchStyle } from '../components/styles/style'
 
@@ -17,7 +19,7 @@ function FormSearchLocation({onChange, onSubmit}) {
             <H2style>Location</H2style>
             <input 
                 type='text'
-                placeholder='City, state, zip code or Location'
+                placeholder={`${globIcon} City, state, zip code or Location`}
                 onChange={onChange}
             />
         </LocationSearchStyle>

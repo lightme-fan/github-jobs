@@ -5,7 +5,10 @@ import { FullTimeStyle } from '../components/styles/style'
 function FullTimeElem({onChange, value}) {
     return (
         <FullTimeStyle>
-            <input type='checkbox' value={value} onChange={onChange}/>
+            <input 
+                type='checkbox' 
+                value={value} 
+                onChange={onChange}/>
             <label>Full Time</label>
         </FullTimeStyle>
     )

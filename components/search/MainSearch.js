@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../ContextProvider'
 
-// Svg
-import {globIcon} from '../../icons/globIcon.svg'
-
 //  Style
 import { FormSearchStyle } from '../styles/style'
 
@@ -29,7 +26,7 @@ function MainSearch() {
                 <input 
                     type='text'
                     value={searchJob}
-                    placeholder={`${globIcon} Title, companie, expertise`}
+                    placeholder= 'Title, companie, expertise'
                     onChange={(e) => setSearchJob(e.target.value)}
                 />
                 <button>Search</button>

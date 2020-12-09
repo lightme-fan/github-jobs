@@ -37636,15 +37636,13 @@ function Header() {
 
 var _default = Header;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"icons/globIcon.svg":[function(require,module,exports) {
-module.exports = "/globIcon.48f25be4.svg";
-},{}],"components/styles/style.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"components/styles/style.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UlStyle = exports.LocationSearchStyle = exports.FullTimeStyle = exports.LiStyle = exports.BackStyle = exports.FormSearchStyle = exports.ArticleStyle = void 0;
+exports.DescStyle = exports.ApplicationStyle = exports.MoreDetailStyle = exports.DetailTitle = exports.UlStyle = exports.LocationSearchStyle = exports.FullTimeStyle = exports.LiStyle = exports.BackStyle = exports.FormSearchStyle = exports.ArticleStyle = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -37676,7 +37674,7 @@ const FormSearchStyle = _styledComponents.default.form`
         input {
             width: 100%;
             padding: 10px;
-            border: none
+            border: none;
         }
 
         button {
@@ -37721,6 +37719,56 @@ const UlStyle = _styledComponents.default.ul`
     padding: 0;
 `;
 exports.UlStyle = UlStyle;
+const DetailTitle = _styledComponents.default.div`
+    display: flex;
+    gap: 2%;
+    button {
+        height: 40px;
+        width: 15%;
+        align-self: center;
+    }
+    span {
+        font-size: 12px;
+        line-height: 14px;
+        color: #B7BCCE;
+    }
+    a {
+        color: color: #1E86FF;;
+    }
+`;
+exports.DetailTitle = DetailTitle;
+const MoreDetailStyle = _styledComponents.default.div`
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 10px;
+    img {
+        width: 20%;
+        height: 100px;
+    }
+    p {
+        font-size: 12px;
+        line-height: 14px;
+        color: #B7BCCE;
+    }
+`;
+exports.MoreDetailStyle = MoreDetailStyle;
+const ApplicationStyle = _styledComponents.default.div`
+    a {
+        color: #1E86FF;
+    }
+`;
+exports.ApplicationStyle = ApplicationStyle;
+const DescStyle = _styledComponents.default.div`
+    a {
+        color: #1E86FF;
+    }
+
+    ul {
+        padding: 0;
+    }
+`;
+exports.DescStyle = DescStyle;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/search/MainSearch.js":[function(require,module,exports) {
 "use strict";
 
@@ -37733,15 +37781,12 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ContextProvider = require("../ContextProvider");
 
-var _globIcon = require("../../icons/globIcon.svg");
-
 var _style = require("../styles/style");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-// Svg
 //  Style
 function MainSearch() {
   const {
@@ -37769,14 +37814,14 @@ function MainSearch() {
   }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     value: searchJob,
-    placeholder: `${_globIcon.globIcon} Title, companie, expertise`,
+    placeholder: "Title, companie, expertise",
     onChange: e => setSearchJob(e.target.value)
   }), /*#__PURE__*/_react.default.createElement("button", null, "Search")));
 }
 
 var _default = MainSearch;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../ContextProvider":"components/ContextProvider.js","../../icons/globIcon.svg":"icons/globIcon.svg","../styles/style":"components/styles/style.js"}],"components/Details.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../ContextProvider":"components/ContextProvider.js","../styles/style":"components/styles/style.js"}],"components/Details.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37807,15 +37852,29 @@ function Details() {
     id
   } = (0, _reactRouterDom.useParams)();
   const newJobs = jobs.filter(job => job.id === id);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Details"), newJobs.map(job => {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, newJobs.map(job => {
+    const jobDate = new Date(job.created_at);
+    const dateNow = new Date(Date.now());
+    const differenceInDate = dateNow.getTime() - jobDate.getTime();
+    const numberOfDay = Math.round(differenceInDate / (1000 * 3600 * 24));
     return /*#__PURE__*/_react.default.createElement("div", {
       key: job.id
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "/"
-    }, /*#__PURE__*/_react.default.createElement(_style.BackStyle, null, "\u2190  Go back")), /*#__PURE__*/_react.default.createElement("h3", null, "How to apply"), /*#__PURE__*/_react.default.createElement("p", null, removeTags(job.how_to_apply))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, job.title), /*#__PURE__*/_react.default.createElement("button", null, job.type), /*#__PURE__*/_react.default.createElement("span", null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_style.BackStyle, null, "\u2190  Back to search")), /*#__PURE__*/_react.default.createElement("h3", null, "How to apply"), /*#__PURE__*/_react.default.createElement(_style.ApplicationStyle, {
+      dangerouslySetInnerHTML: {
+        __html: job.how_to_apply
+      }
+    })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_style.DetailTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, job.title, /*#__PURE__*/_react.default.createElement("br", null), " ", /*#__PURE__*/_react.default.createElement("span", null, numberOfDay, " ", numberOfDay === 1 ? 'day' : 'days', " ago")), /*#__PURE__*/_react.default.createElement("button", null, job.type === 'Full Time' && 'Full Time')), /*#__PURE__*/_react.default.createElement(_style.MoreDetailStyle, null, /*#__PURE__*/_react.default.createElement("img", {
+      className: "image",
       src: job.company_logo,
       alt: job.title
-    }), /*#__PURE__*/_react.default.createElement("h3", null, job.company), /*#__PURE__*/_react.default.createElement("p", null, job.location))), /*#__PURE__*/_react.default.createElement("p", null, job.description));
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, job.company), /*#__PURE__*/_react.default.createElement("p", null, job.location))), /*#__PURE__*/_react.default.createElement(_style.DescStyle, {
+      id: "desc",
+      dangerouslySetInnerHTML: {
+        __html: job.description
+      }
+    })));
   }));
 }
 
@@ -37943,7 +38002,9 @@ function CityElement({
 
 var _default = CityElement;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../components/styles/style":"components/styles/style.js"}],"pages/FormSearchLocation.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../components/styles/style":"components/styles/style.js"}],"icons/globIcon.svg":[function(require,module,exports) {
+module.exports = "/globIcon.48f25be4.svg";
+},{}],"pages/FormSearchLocation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37954,6 +38015,8 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _globIcon = _interopRequireDefault(require("../icons/globIcon.svg"));
 
 var _style = require("../components/styles/style");
 
@@ -37975,14 +38038,14 @@ function FormSearchLocation({
     onSubmit: onSubmit
   }, /*#__PURE__*/_react.default.createElement(H2style, null, "Location"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    placeholder: "City, state, zip code or Location",
+    placeholder: `${_globIcon.default} City, state, zip code or Location`,
     onChange: onChange
   }));
 }
 
 var _default = FormSearchLocation;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../components/styles/style":"components/styles/style.js"}],"components/search/FilterByLocation.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../icons/globIcon.svg":"icons/globIcon.svg","../components/styles/style":"components/styles/style.js"}],"components/search/FilterByLocation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38087,13 +38150,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // Imort style
 function App() {
   return /*#__PURE__*/_react.default.createElement(_style.ArticleStyle, null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement("div", {
-    className: "container"
+    className: "container details"
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_MainSearch.default, null), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_FilterByType.default, null), /*#__PURE__*/_react.default.createElement(_FilterByLocation.default, null)), /*#__PURE__*/_react.default.createElement(_Jobs.default, null))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/:id"
-  }, /*#__PURE__*/_react.default.createElement("span", null, "Description"), /*#__PURE__*/_react.default.createElement(_Details.default, null)))));
+  }, /*#__PURE__*/_react.default.createElement(_Details.default, null)))));
 }
 
 var _default = App;

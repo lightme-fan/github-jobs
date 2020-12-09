@@ -1,55 +1,14 @@
 # Github Jobs
 
-Here we are, the last graded project of this semester.
-
-Your challenge: Create a job search using an API, and use React to handle the frontend. Don’t look at the existing solution. Fulfill user stories below:
-
-![image](./assets/1.png)
-![image](./assets/2.png)
-![image](./assets/3.png)
-
-- User story: I can see a list of jobs in a city by default
-- User story: I can search for jobs with a given keyword
-- User story: I can search for jobs with a city name, zip code or other location
-- User story: I can select one option from at least 4 pre-defined options
-- User story: I can search for a full-time job only
-- User story: I can see a list of jobs with their logo, company name, location, and posted time.
-- User story: When I select a job, I can see job descriptions and how to apply like the given design.
-- User story: When I am on the job details page, I can go back to the search page
-- User story (optional): I can see a list of jobs in the closest city from my location by default
-- User story (optional): I can see jobs in different pages, 5 items each page
-
-You’ll also have to apply a few concept we learned in class, such as a **reducer** and a global **context**. And there will be a bonus for those who can find a use case for a **compound component**.
-
-**Icon**: https://google.github.io/material-design-icons/ (you can also use the react-icons package)
-
-**API**: https://jobs.github.com/api. Use data from the API to create questions and answers.
-
-*If you get some CORS errors, you can use https://cors-anywhere.herokuapp.com/ to help with accessing data from other websites that are normally forbidden by the same-origin policy of web browsers*
-
-**Design** : https://www.figma.com/file/gAkVx9CdOqnJcCjJ7nVNkw
-
-**Live app** : https://jolly-heisenberg-20c49e.netlify.app/
-
-Once you completed, polish a nice readme submit your solutions on this link : https://forms.gle/Xg6kJMKmrBkyTe3TA, by providing URLs for both GitHub repository and live app on Netlify.
-
-For the custom domain url you'll enter in netlify, please use the following naming convention : **github-jobs-_YOUR_FIRSTNAME_.netlify.app** (replace YOUR_FIRSTNAME by your firstname)
-
-Good luck everybody!
-
-Template for your readme :
-
-<!-- Please update value in the {}  -->
-
-<h1 align="center">{Your project name}</h1>
+<h1 align="center">Github Jobs</h1>
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://fanilo-github-jobs.netlify.app/">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://github.com/lightme-fan/github-jobs">
       Solution
     </a>
   </h3>
@@ -70,45 +29,72 @@ Template for your readme :
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](./assets/screeshot.png)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
+### My Project
 
--   Where can I see your demo?
--   What was your experience?
--   In a few sentences, explain the structure of your project.
--   If you had more time, what area of your project would you improve?
--   Did you learn anything new while working on this project?
--   What was the most challenging part for you?
--   Any other comments?
+- You can see the demo of this project by visiting this link **https://fanilo-github-jobs.netlify.app/**.
 
+1- In this project, I come accross with a lot of experiences. I find out how useReducer and filter work together. I also install few packages which I never came accross such as react-js-pagination. So, I find out how pagination work in react.
 
+2- This project has few **folders** which contain few files. Fistly, I have a big ***components*** folder. In this folder, there are two folders and six js files. Those two folders are **search** and **style** which contains **style.js** file. In ***search*** folder, there are four js files. Those six files are **FilterByLocation**, **FilterByType**, **MainSearch** and **Search**.
+
+- These are also the 6 js files in the big components
+  - App.js
+  - ContextProvider.js
+  - Details.js
+  - Header.js
+  - Jobs.js
+  - useAppReducer.js
+
+- I also a **pags** folder in which I store **JSX**. This folder has four js files which are:
+  - CityElement.js
+  - FormSearchLocation.js
+  - FullTimeElem.js
+  - JobElement.js
+
+- I also Created a **citiesData.json** to store the list of cities so that I can search a specific job by those cities.
+
+- I have an **index.scss** for default styles because I used **styled-components** instead. 
+
+3- If I had more time to accomplish this project, I would have improved my useReducer and the fetch data. I also could have added the icons on the first and the second input search. 
+
+4- I learnt a lot from this project. I learnt how to build pagination in react. I as well learnt how to convert string to html elements because the job descriptions are string. But there are html tags in it. So I tried to display those html.
+
+5- The most challenging part in this project is the **fetch data**. I found it hard because I always get an error which says that the **CORS** of the api is broken.
 
 ### Built With
-
-<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
-
--   [React](https://reactjs.org/)
+This project is build with [React](https://reactjs.org/)
 
 ## Features
+These are the feature of this project
 
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+- Searching jobs by title or company
+- Searching jobs by location or city
+- Searching by type, Just check the full time checkbox
+- Search by checking the city checkboxes
+- At the bottom of the job list, you can see other jobs by going to the next page.
 
 ## How To Use
-
-<!-- Example: -->
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone https://github.com/lightme-fan/github-jobs
 
 # Install dependencies
-$ npm install
+$ npm init
+
+$ npm install react
+$ npm install react-dom
+$ npm install react-router-dom
+$ npm install react-js-pagination
+$ npm install react-axios
+$ npm install styled-components
 
 # Run the app
-$ npm start
+$ parcel index.html
 ```
 
 ## Acknowledgements
@@ -117,5 +103,5 @@ $ npm start
 
 ## Contact
 
--   Website [your-website.com](https://{your-web-site-link})
--   GitHub [@your-username](https://{github.com/your-usermame})
+-   Website [Github jobs](https://fanilo-github-jobs.netlify.app/)
+-   GitHub [lightme-fan](https://github.com/lightme-fan/github-jobs)

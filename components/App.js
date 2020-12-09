@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { Switch, Route } from 'react-router-dom';
-import styled from 'styled-components';
 
 // Import files
 import Jobs from './Jobs';

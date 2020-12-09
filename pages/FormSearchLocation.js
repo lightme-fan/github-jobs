@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import globIcon from '../icons/globIcon.svg'
-
 // Style 
 import { LocationSearchStyle } from '../components/styles/style'
 

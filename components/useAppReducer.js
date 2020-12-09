@@ -23,9 +23,10 @@ function reducer(state, action) {
                 jobs: action.allJobs
             }
         }
-        case 'SEARCH_BY_TITLE': {
+        case 'MAIN_SEARCH': {
             return {
                 ...state,
+                loading: false,
                 jobs: action.newJob 
             }
         }
@@ -33,6 +34,7 @@ function reducer(state, action) {
         case 'SEARCH_BY_TYPE': {
             return {
                 ...state,
+                loading: false,
                 jobs: action.newJobWithType 
             }
         }
@@ -40,6 +42,7 @@ function reducer(state, action) {
         case 'SEARCH_BY_LOCATION': {
             return {
                 ...state,
+                loading: false,
                 jobs: action.newJobByLocation 
             }
         }
@@ -47,6 +50,7 @@ function reducer(state, action) {
         case 'SEARCH_BY_CITIES': {
             return {
                 ...state,
+                loading: false,
                 jobs: action.newJobByCities 
             }
         }

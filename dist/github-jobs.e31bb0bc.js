@@ -37389,9 +37389,10 @@ function reducer(state, action) {
         };
       }
 
-    case 'SEARCH_BY_TITLE':
+    case 'MAIN_SEARCH':
       {
         return { ...state,
+          loading: false,
           jobs: action.newJob
         };
       }
@@ -37399,6 +37400,7 @@ function reducer(state, action) {
     case 'SEARCH_BY_TYPE':
       {
         return { ...state,
+          loading: false,
           jobs: action.newJobWithType
         };
       }
@@ -37406,6 +37408,7 @@ function reducer(state, action) {
     case 'SEARCH_BY_LOCATION':
       {
         return { ...state,
+          loading: false,
           jobs: action.newJobByLocation
         };
       }
@@ -37413,6 +37416,7 @@ function reducer(state, action) {
     case 'SEARCH_BY_CITIES':
       {
         return { ...state,
+          loading: false,
           jobs: action.newJobByCities
         };
       }
@@ -37509,18 +37513,31 @@ const ParentStyle = _styledComponents.default.div`
     display: grid;
     grid-template-columns: 10% 1fr 30%;
     gap: 20px;
+    color: #334680;
     div {
         margin-left: 10%;
+    }
+    .company {
+        font-size: 12px;
+        line-height: 14px;
     }
     margin-top: 2rem;
     background: #FFFFFF;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
     border-radius: 4px;
     padding: 1rem;
+    .about {
+        align-items: end;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        font-size: 12px;
+        line-height: 14px;
+        color: #B9BDCF;
+    }
 `;
 const ImageStyle = _styledComponents.default.img`
     width: 100%;
-    align-self: center;
 `;
 
 function JobElement({
@@ -37528,13 +37545,19 @@ function JobElement({
   title,
   company,
   location,
-  created_at,
+  time,
   type
 }) {
   return /*#__PURE__*/_react.default.createElement(ParentStyle, null, /*#__PURE__*/_react.default.createElement(ImageStyle, {
     src: company_logo,
     alt: title
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, company), /*#__PURE__*/_react.default.createElement("p", null, title), /*#__PURE__*/_react.default.createElement("button", null, type)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, location), /*#__PURE__*/_react.default.createElement("p", null, created_at)));
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "company"
+  }, company), /*#__PURE__*/_react.default.createElement("p", {
+    className: "title"
+  }, title), /*#__PURE__*/_react.default.createElement("button", null, type)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "about"
+  }, /*#__PURE__*/_react.default.createElement("p", null, location), /*#__PURE__*/_react.default.createElement("p", null, time, " ", time === 1 ? 'day' : 'days', " ago")));
 }
 
 var _default = JobElement;
@@ -37561,6 +37584,8 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function Jobs() {
   const {
     loading,
@@ -37578,10 +37603,16 @@ function Jobs() {
   // console.log(slicedJobs);
 
   return /*#__PURE__*/_react.default.createElement("div", null, loading ? /*#__PURE__*/_react.default.createElement("h2", null, "Loading...") : jobs.map(job => {
+    const jobDate = new Date(job.created_at);
+    const dateNow = new Date(Date.now());
+    const differenceInDate = dateNow.getTime() - jobDate.getTime();
+    const numberOfDay = Math.round(differenceInDate / (1000 * 3600 * 24));
     return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: `/${job.id}`,
       key: `${job.id}${job.title}`
-    }, /*#__PURE__*/_react.default.createElement(_JobElement.default, job));
+    }, /*#__PURE__*/_react.default.createElement(_JobElement.default, _extends({
+      time: numberOfDay
+    }, job)));
   }));
 }
 
@@ -37605,7 +37636,9 @@ function Header() {
 
 var _default = Header;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/styles/style.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"icons/globIcon.svg":[function(require,module,exports) {
+module.exports = "/globIcon.48f25be4.svg";
+},{}],"components/styles/style.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37620,6 +37653,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const ArticleStyle = _styledComponents.default.article`
     max-width: 1200px;
     margin: auto;
+    color: #334680;
 `;
 exports.ArticleStyle = ArticleStyle;
 const FormSearchStyle = _styledComponents.default.form`
@@ -37699,12 +37733,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ContextProvider = require("../ContextProvider");
 
+var _globIcon = require("../../icons/globIcon.svg");
+
 var _style = require("../styles/style");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+// Svg
 //  Style
 function MainSearch() {
   const {
@@ -37712,17 +37749,17 @@ function MainSearch() {
     dispatch
   } = (0, _react.useContext)(_ContextProvider.Context);
   const [searchJob, setSearchJob] = (0, _react.useState)('');
-  const [searchResult, setSearchResult] = (0, _react.useState)([]);
 
   function searchParticularJob(e) {
     e.preventDefault();
-    const filteredByTitle = jobs.filter(job => {
+    const filteredJobs = jobs.filter(job => {
       const searchByTile = job.title.toLowerCase().includes(searchJob.toLowerCase());
-      return searchByTile;
+      const searchByCompany = job.company.toLowerCase().includes(searchJob.toLowerCase());
+      return searchByTile || searchByCompany;
     });
     dispatch({
-      type: 'SEARCH_BY_TITLE',
-      newJob: filteredByTitle
+      type: 'MAIN_SEARCH',
+      newJob: filteredJobs
     });
     setSearchJob('');
   }
@@ -37732,14 +37769,14 @@ function MainSearch() {
   }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     value: searchJob,
-    placeholder: "Title, companie, expertise",
+    placeholder: `${_globIcon.globIcon} Title, companie, expertise`,
     onChange: e => setSearchJob(e.target.value)
   }), /*#__PURE__*/_react.default.createElement("button", null, "Search")));
 }
 
 var _default = MainSearch;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../ContextProvider":"components/ContextProvider.js","../styles/style":"components/styles/style.js"}],"components/Details.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../ContextProvider":"components/ContextProvider.js","../../icons/globIcon.svg":"icons/globIcon.svg","../styles/style":"components/styles/style.js"}],"components/Details.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38105,7 +38142,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50662" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58797" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

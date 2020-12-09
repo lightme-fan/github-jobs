@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ArticleStyle = styled.article`
     max-width: 1200px;
     margin: auto;
+    color: #334680;
 `;
 
 export const FormSearchStyle = styled.form`

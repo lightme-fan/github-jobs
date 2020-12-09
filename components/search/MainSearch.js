@@ -1,5 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../ContextProvider'
+
+// Svg
+import {globIcon} from '../../icons/globIcon.svg'
 
 //  Style
 import { FormSearchStyle } from '../styles/style'
@@ -7,26 +10,26 @@ import { FormSearchStyle } from '../styles/style'
 function MainSearch() {
     const {jobs, dispatch} = useContext(Context)
     const [ searchJob, setSearchJob ] = useState('')
-    const [ searchResult, setSearchResult] = useState([])
-
+    
     function searchParticularJob(e) {
         e.preventDefault()
-        const filteredByTitle = jobs.filter(job => {
+        const filteredJobs = jobs.filter(job => {
             const searchByTile = job.title.toLowerCase().includes(searchJob.toLowerCase())
-            return searchByTile
+            const searchByCompany = job.company.toLowerCase().includes(searchJob.toLowerCase())
+            return searchByTile || searchByCompany 
         })
 
-        dispatch({type: 'SEARCH_BY_TITLE', newJob: filteredByTitle})
+        dispatch({type: 'MAIN_SEARCH', newJob: filteredJobs})
         setSearchJob('')
     }
-    
+
     return (
         <FormSearchStyle onSubmit={searchParticularJob}>
             <fieldset>
                 <input 
                     type='text'
                     value={searchJob}
-                    placeholder='Title, companie, expertise'
+                    placeholder={`${globIcon} Title, companie, expertise`}
                     onChange={(e) => setSearchJob(e.target.value)}
                 />
                 <button>Search</button>

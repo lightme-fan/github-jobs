@@ -28,6 +28,7 @@ function FilterByLocation() {
 
         dispatch({type: 'SEARCH_BY_CITIES', newJobByCities: job})
     }
+    
     return (
         <div>
             <FormSearchLocation 

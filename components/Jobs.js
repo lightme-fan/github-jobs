@@ -26,9 +26,14 @@ function Jobs() {
             {loading ? 
                 <h2>Loading...</h2> :
                 jobs.map(job => {
+                    const jobDate = new Date(job.created_at)
+                    const dateNow = new Date(Date.now())
+                    const differenceInDate = dateNow.getTime() - jobDate.getTime()
+                    const numberOfDay = Math.round(differenceInDate / (1000 * 3600 * 24))
+
                     return (
                         <Link to={`/${job.id}`} key={`${job.id}${job.title}`}>
-                            <JobElement {...job}/>
+                            <JobElement time={numberOfDay} {...job} />
                         </Link>
                     )
                 })} 
